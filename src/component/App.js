@@ -46,7 +46,7 @@ class App extends Component {
         this.setState(({data, basket}) => {
             const index = basket.findIndex((item) => item.id === id)
             if (index === -1) {
-                const item = {...data.find((item) => item.id === id)}
+                const item = {...data.find((item) => item.id === id),count:1}
                 return {basket: [...basket, item]}
             }
             return {};
