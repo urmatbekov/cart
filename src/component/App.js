@@ -42,13 +42,24 @@ class App extends Component {
         basket: []
     }
 
+    addProduct = (id) => () => {
+        this.setState(({data, basket}) => {
+            const index = basket.findIndex((item) => item.id === id)
+            if (index === -1) {
+                const item = {...data.find((item) => item.id === id)}
+                return {basket: [...basket, item]}
+            }
+            return {};
+        })
+    }
+
     render() {
         return (
             <div>
                 <div className='container jumbotron'>
                     <div className="row">
                         {this.state.data.map((item) => {
-                            return <Product key={item.id} {...item}/>
+                            return <Product addProduct={this.addProduct} key={item.id} {...item}/>
                         })}
 
                     </div>

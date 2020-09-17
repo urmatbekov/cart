@@ -2,7 +2,7 @@ import React from 'react';
 
 const BasketItem = ({image, title, rebate}) => {
     return (
-        <div className="row">
+        <div style={{marginBottom:'10px'}} className="row">
             <div className="col-2"><img
                 src={image}
                 className="card-img-top" alt="..."/></div>
