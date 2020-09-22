@@ -5,6 +5,7 @@ import Basket from "./basket";
 class App extends Component {
 
     state = {
+        basket: [],
         data: [
             {
                 id: 1,
@@ -39,17 +40,47 @@ class App extends Component {
                 image: "//www-file.huawei.com/-/media/corp2020/home/box/1/wa-pctchgt2.jpg"
             },
         ],
-        basket: []
+
     }
 
     addProduct = (id) => () => {
         this.setState(({data, basket}) => {
             const index = basket.findIndex((item) => item.id === id)
             if (index === -1) {
-                const item = {...data.find((item) => item.id === id),count:1}
-                return {basket: [...basket, item]}
+                const item = data.find((item) => item.id === id)
+                const newItem = {...item, sum: item.rebate, count: 1}
+                return {basket: [...basket, newItem]}
             }
             return {};
+        })
+    }
+
+    plusProduct = (id) => () => {
+        this.setState(({basket}) => {
+            const index = basket.findIndex((item) => item.id === id)
+            if (index >= 0) {
+                const item = basket[index]
+                const count = item.count + 1
+                const sum = count * item.rebate
+                const newItem = {...item, count, sum}
+                return {basket: [...basket.slice(0, index), newItem, ...basket.slice(index + 1)]}
+            }
+        })
+    }
+
+    minusProduct = (id) => () => {
+        this.setState(({basket}) => {
+            const index = basket.findIndex((item) => item.id === id)
+            if (index >= 0) {
+                const item = basket[index]
+                const count = item.count - 1
+                if (count <= 0){
+                    return
+                }
+                const sum = count * item.rebate
+                const newItem = {...item, count, sum}
+                return {basket: [...basket.slice(0, index), newItem, ...basket.slice(index + 1)]}
+            }
         })
     }
 
@@ -64,7 +95,7 @@ class App extends Component {
 
                     </div>
                 </div>
-                <Basket basket={this.state.basket}/>
+                <Basket minusProduct={this.minusProduct} plusProduct={this.plusProduct} basket={this.state.basket}/>
             </div>
         );
     }
