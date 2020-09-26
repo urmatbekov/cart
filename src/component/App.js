@@ -51,19 +51,25 @@ class App extends Component {
                 const newItem = {...item, sum: item.rebate, count: 1}
                 return {basket: [...basket, newItem]}
             }
-            return {};
+            return this.addCount(basket,index)
         })
     }
 
-    plusProduct = (id,step) => () => {
+    addCount = (basket,index,step=1) => {
+        const item = {...basket[index]}
+        item.count += step
+        if (item.count < 1){
+            return ;
+        }
+        item.sum = item.count * item.rebate
+        return {basket: [...basket.slice(0,index), item,...basket.slice(index+1)]};
+    }
+
+    plusProduct = (id, step) => () => {
         this.setState(({basket}) => {
             const index = basket.findIndex((item) => item.id === id)
             if (index >= 0) {
-                const item = basket[index]
-                const count = item.count + step
-                const sum = count * item.rebate
-                const newItem = {...item, count, sum}
-                return {basket: [...basket.slice(0, index), newItem, ...basket.slice(index + 1)]}
+                return this.addCount(basket,index,step)
             }
         })
     }
