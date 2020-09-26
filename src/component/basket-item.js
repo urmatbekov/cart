@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BasketItem = ({image,id, title, sum,count,plusProduct,minusProduct}) => {
+const BasketItem = ({deleteProduct,image,id, title, sum,count,plusProduct,minusProduct}) => {
     return (
         <div style={{marginBottom:'10px'}} className="row">
             <div className="col-2"><img
@@ -15,7 +15,7 @@ const BasketItem = ({image,id, title, sum,count,plusProduct,minusProduct}) => {
                 </div>
             </div>
             <div className="col-2">{sum} com</div>
-            <div className="col-2"><button className="btn btn-primary"> delete</button></div>
+            <div className="col-2"><button onClick={deleteProduct(id)} className="btn btn-primary"> delete</button></div>
         </div>
     );
 }
