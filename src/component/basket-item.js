@@ -9,9 +9,9 @@ const BasketItem = ({image,id, title, sum,count,plusProduct,minusProduct}) => {
             <div className="col-2">{title}</div>
             <div className="col-3">
                 <div style={{flexWrap: "nowrap"}} className="row">
-                    <button onClick={minusProduct(id)} className="btn btn-primary">-</button>
+                    <button onClick={plusProduct(id,-1)} className="btn btn-primary">-</button>
                     <span className="form-control">{count}</span>
-                    <button onClick={plusProduct(id)} className="btn btn-primary">+</button>
+                    <button onClick={plusProduct(id,1)} className="btn btn-primary">+</button>
                 </div>
             </div>
             <div className="col-2">{sum} com</div>
