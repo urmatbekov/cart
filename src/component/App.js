@@ -8,7 +8,7 @@ class App extends Component {
         basket: [],
         data: [
             {
-                id: 1,
+                id: 12211,
                 title: 'Asan',
                 rebate: 100,
                 price: 120,
@@ -16,7 +16,7 @@ class App extends Component {
                 image: "//www-file.huawei.com/-/media/corp2020/home/box/1/wa-pctchgt2.jpg"
             },
             {
-                id: 2,
+                id: 2546,
                 title: 'Hasan',
                 rebate: 200,
                 price: 234,
@@ -24,7 +24,7 @@ class App extends Component {
                 image: "//www-file.huawei.com/-/media/corp2020/home/box/1/wa-pctchgt2.jpg"
             },
             {
-                id: 3,
+                id: 3234,
                 title: 'Masan',
                 rebate: 500,
                 price: 543,
@@ -32,7 +32,7 @@ class App extends Component {
                 image: "//www-file.huawei.com/-/media/corp2020/home/box/1/wa-pctchgt2.jpg"
             },
             {
-                id: 4,
+                id: 43535,
                 title: 'Uson',
                 rebate: 100,
                 price: 123,
@@ -79,6 +79,7 @@ class App extends Component {
     }
 
     plusProduct = (id, step) => () => {
+        console.log(id)
         this.setState(({basket}) => {
             const index = basket.findIndex((item) => item.id === id)
             if (index !== -1) {
@@ -99,6 +100,7 @@ class App extends Component {
                     </div>
                 </div>
                 <Basket deleteProduct={this.deleteProduct} minusProduct={this.minusProduct} plusProduct={this.plusProduct} basket={this.state.basket}/>
+
             </div>
         );
     }
